@@ -1,0 +1,17 @@
+#!/bin/bash
+# The logic to start up your application should be put in this
+# script. The application will work only if it binds to
+# $OPENSHIFT_DIY_IP:8080
+
+cd $OPENSHIFT_DATA_DIR
+
+if [[ ! -f $OPENSHIFT_DATA_DIR/minio ]] ; then
+    wget -c "https://dl.minio.io/server/minio/release/linux-amd64/minio"
+fi
+
+for x in configs persist ; do
+    if [[ ! -d "$OPENSHIFT_DATA_DIR/$x" ]] ; then
+        mkdir -p $OPENSHIFT_DATA_DIR/$x
+    fi
+done
+

@@ -2,4 +2,14 @@
 # The logic to start up your application should be put in this
 # script. The application will work only if it binds to
 # $OPENSHIFT_DIY_IP:8080
-nohup $OPENSHIFT_REPO_DIR/diy/testrubyserver.rb $OPENSHIFT_DIY_IP $OPENSHIFT_REPO_DIR/diy |& /usr/bin/logshifter -tag diy &
+
+export PORT=$OPENSHIFT_DIY_PORT
+
+#export PROGRAM_ARGs="$OPENSHIFT_DIY_IP $OPENSHIFT_REPO_DIR/diy"
+export PROGRAM_ARGs="server "$OPENSHIFT_DATA_DIR"persist"
+export PROGRAM_ARGs=$PROGRAM_ARGs" --config-dir "$OPENSHIFT_DATA_DIR"configs"
+#export PROGRAM_ARGs=$PROGRAM_ARGs" -bind=$OPENSHIFT_DIY_IP"
+#export PROGRAM_ARGs=$PROGRAM_ARGs" -port=$OPENSHIFT_DIY_PORT"
+
+nohup $OPENSHIFT_DATA_DIR/minio $PROGRAM_ARGs |& /usr/bin/logshifter -tag diy &
+
