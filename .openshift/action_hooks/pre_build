@@ -9,6 +9,10 @@ if [[ ! -f $OPENSHIFT_DATA_DIR/minio ]] ; then
     wget -c "https://dl.minio.io/server/minio/release/linux-amd64/minio"
 fi
 
+#if [[ ! -x $OPENSHIFT_DATA_DIR/minio ]] ; then
+chmod +x $OPENSHIFT_DATA_DIR/minio
+#fi
+
 for x in configs persist ; do
     if [[ ! -d "$OPENSHIFT_DATA_DIR/$x" ]] ; then
         mkdir -p $OPENSHIFT_DATA_DIR/$x
