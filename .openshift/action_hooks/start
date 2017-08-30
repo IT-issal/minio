@@ -5,10 +5,10 @@
 
 export PORT=$OPENSHIFT_DIY_PORT
 
-#export PROGRAM_ARGs="$OPENSHIFT_DIY_IP $OPENSHIFT_REPO_DIR/diy"
 export PROGRAM_ARGs="server "$OPENSHIFT_DATA_DIR"persist"
-export PROGRAM_ARGs=$PROGRAM_ARGs" --address $OPENSHIFT_DIY_IP:$OPENSHIFT_DIY_PORT"
 export PROGRAM_ARGs=$PROGRAM_ARGs" --config-dir "$OPENSHIFT_DATA_DIR"configs"
+export PROGRAM_ARGs=$PROGRAM_ARGs" --address $OPENSHIFT_DIY_IP"
+#export PROGRAM_ARGs=$PROGRAM_ARGs" --address $OPENSHIFT_DIY_IP:$OPENSHIFT_DIY_PORT"
 
 nohup $OPENSHIFT_DATA_DIR/minio $PROGRAM_ARGs |& /usr/bin/logshifter -tag diy &
 
